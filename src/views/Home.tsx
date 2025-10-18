@@ -1,6 +1,7 @@
 import SiderSocial from "../components/layout/SiderSocial";
 import Hero from "../components/sections/Hero";
 import Planes from "../components/sections/Planes";
+import Portfolio from "../components/sections/Portfolio";
 
 const Home = () => {
   return (
@@ -8,6 +9,7 @@ const Home = () => {
       <SiderSocial />
       <Hero />
       <Planes />
+      <Portfolio />
     </div>
   )
 };

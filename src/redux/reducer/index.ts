@@ -1,12 +1,14 @@
 import { combineReducers } from "redux";
 import authReducer from "./authReducer";
 import planReducer from "./planReducer";
+import inquiryReducer from "./inquiryReducer";
+import projectReducer from "./projectReducer";
 
-
-// Combina todos los reducers en uno solo
 const rootReducer = combineReducers({
   auth: authReducer,
-  plan: planReducer   
+  plan: planReducer,
+  inquiry: inquiryReducer,
+  project: projectReducer,  
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

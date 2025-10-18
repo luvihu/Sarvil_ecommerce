@@ -1,58 +1,44 @@
 import { motion, type Variants } from 'framer-motion';
-import { useDispatch } from 'react-redux';
-import { selectPlan } from '../../redux/actions';
-import type { AppDispatch } from '../../redux/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { allPlans } from '../../redux/actions/plans/allPlans';
+import type { AppDispatch, RootState } from '../../redux/store';
+import { useEffect, useState } from 'react';
+import ContactModal from '../modals/ContactModal';
 
-export interface Plan {
+export interface PlanInter {
+  id: string;
   name: string;
   description: string;
   deliverables: string[];
-  price: string;
-  accentColor: string;
-};
+  priceRange: string;
+  };
 
 const Planes = () => {
   const dispatch = useDispatch<AppDispatch>();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedPlanName, setSelectedPlanName] = useState<string | null>(null);
 
-  const plans: Plan[] = [
-    {
-      name: "Landing Express",
-      description: "Paquete de entrada ideal para emprendedores",
-      deliverables: [
-        "1 página responsiva",
-        "Formulario + enlace a WhatsApp",
-        "1 sección catálogo",
-        "Hosting básico",
-        "1 revisión"
-      ],
-      price: "Desde S/120 – S/350",
-      accentColor: "border-electric-blue"
-    },
-    {
-      name: "Catálogo / Tienda Básica",
-      description: "Para negocios que venden productos",
-      deliverables: [
-        "Catálogo de productos",
-        "Carrito ligero con MercadoPago/Yape",
-        "Panel CMS",
-        "2 revisiones"
-      ],
-      price: "S/400 – S/1,200",
-      accentColor: "border-cyan-cyan"
-    },
-    {
-      name: "Automatización & Chatbot",
-      description: "Flujos inteligentes para tu negocio",
-      deliverables: [
-        "Integración redes → CRM",
-        "Respuestas automáticas en WhatsApp/IG",
-        "Triggers para pedidos y notificaciones",
-        "1 automatización compleja (ej. form → WhatsApp + Sheets)"
-      ],
-      price: "Configuración S/150–S/500",
-      accentColor: "border-blue-ul"
-    }
-  ];
+  useEffect(() => {
+    dispatch(allPlans());
+  }, [dispatch]);
+
+  const plans = useSelector((state: RootState) => state.plan.plans);
+   if (!plans || plans.length === 0) {
+    return (
+      <section className="py-16 px-4 bg-white">
+        <div className="max-w-7xl mx-auto text-center">
+          <p className="text-gray-600">Cargando planes...</p>
+        </div>
+      </section>
+    )
+  }
+
+  const planColors = [
+    "border-electric-blue",
+    "border-cyan-cyan",
+    "border-blue-ul"
+  ]
+
 
   const container = {
     hidden: { opacity: 0 },
@@ -69,15 +55,14 @@ const Planes = () => {
     hidden: { y: 20, opacity: 0 },
     show: { y: 0, opacity: 1, transition: { duration: 0.5, ease: "easeOut" as const } }
   };
-
-  const handleQuote = (planName: string) => {
-    dispatch(selectPlan(planName));
-    // Opcional: redirigir a formulario de contacto
-    window.location.href = '/contacto#cotizacion';
+ 
+  const handleModal = (planName: string) => {
+    setSelectedPlanName(planName);
+    setIsModalOpen(true);
   };
-
+  
   return (
-    <section className="py-16 px-4 bg-white">
+     <section className="py-16 px-4 bg-white ml-2 md:ml-12">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -99,34 +84,39 @@ const Planes = () => {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8 md:ml-10"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
         >
           {plans.map((plan, index) => (
             <motion.div
-              key={index}
+              key={plan.id}
               variants={item}
-              className={`border-l-4 ${plan.accentColor} rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 bg-gray-50 p-6 flex flex-col h-full`}
+              className={`border-l-4 ${planColors[index % planColors.length]} rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 bg-gray-50 p-6 flex flex-col h-full`}
             >
               <div className="mb-5">
-                <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-almost-black">{plan.name}</h3>
-                <p className="text-xs md:text-sm text-blue-nav mt-1">{plan.description}</p>
+                <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-almost-black">
+                  {plan.name}
+                </h3>
+                <p className="text-xs md:text-sm text-blue-nav mt-1">
+                  {plan.description}
+                </p>
               </div>
 
               <ul className="mb-6 space-y-2 flex-grow">
                 {plan.deliverables.map((item, i) => (
                   <li key={i} className="flex items-start">
                     <span className="text-electric-blue mr-2">•</span>
-                    <span className="text-gray-900 text-sm sm:text-base md:text-lg">{item}</span>
+                    <span className="text-gray-900 text-sm">{item}</span>
                   </li>
                 ))}
               </ul>
 
               <div className="mt-auto pt-4 border-t border-gray-200 space-y-3">
-                <p className="font-semibold text-sm md:text-base lg:text-lg text-almost-black">{plan.price}</p>
-                <button
-                  onClick={() => handleQuote(plan.name)}
-                  className="w-full py-2 bg-electric-blue text-white rounded-lg hover:bg-blue-500 transition-colors md:font-medium"
-                >
+                <p className="font-semibold text-sm md:text-base text-almost-black">
+                  {plan.priceRange}
+                </p>
+                <button 
+                onClick={() => handleModal(plan.name)}
+                className="w-full py-2 bg-electric-blue text-white rounded-lg hover:bg-blue-700 transition-colors font-medium">
                   Cotizar
                 </button>
               </div>
@@ -134,6 +124,13 @@ const Planes = () => {
           ))}
         </motion.div>
       </div>
+      {selectedPlanName && (
+        <ContactModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          selectedPlan={selectedPlanName}
+        />
+      )}
     </section>
   );
 };
