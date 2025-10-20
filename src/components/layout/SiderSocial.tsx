@@ -35,7 +35,7 @@ const SiderSocial = () => {
  
   return (
      <div className="fixed left-4 top-60 z-40 hidden md:flex">
-      <div className="flex flex-col space-y-10 p-1 bg-cyan-100/20 backdrop-blur-md border rounded-2xl shadow-lg shadow-black/20">
+      <div className="flex flex-col space-y-10 p-2 bg-cyan-100/20 backdrop-blur-md border rounded-2xl shadow-lg shadow-black/20">
         {socials.map((social) => (
           <a
             key={social.label}

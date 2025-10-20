@@ -38,7 +38,9 @@ body {
   /* background-color: #f0f8ff; */
 }
 
-html,
+html {
+   scroll-behavior: smooth;
+}
 body {
   height: 100vh;
   width: 100vw;
@@ -58,3 +60,39 @@ p {
   line-height: 1.5;
 
 }
+
+/* Scrollbar personalizado - Sin dependencias externas */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f8;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #010611 20%, #06B6D4 100%);
+  border-radius: 10px;
+  border: 1px solid #dae9f8;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #0d1b47 0%, #0891b2 100%);
+}
+
+/* Para Firefox
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #2563EB #f1f5f9;
+} */
+
+/* Para Safari mobile */
+@supports (-webkit-touch-callout: none) {
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+}
+
+

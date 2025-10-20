@@ -1,38 +1,43 @@
-import { Link, useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
+// src/components/layout/Navbar.tsx
+import { useState } from "react";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const location = useLocation();
 
-  // Cerrar menú al cambiar de ruta
-  useEffect(() => {
+  // Cerrar menú al hacer clic en un enlace (móvil)
+  const handleNavClick = () => {
     setIsMenuOpen(false);
-  }, [location]);
+  };
 
-  const navItems = ['Nosotros', 'Servicios', 'Portafolio', 'Contacto'];
+  const navItems = [
+    { name: 'Nosotros', id: 'nosotros' },
+    { name: 'Servicios', id: 'servicios' },
+    { name: 'Portafolio', id: 'portafolio' },
+    { name: 'Contacto', id: 'contacto' },
+  ];
 
   return (
-    <nav className="fixed top-0 left-0 w-full bg-blue-nav2 text-light-gray z-50 shadow-md">
+    <nav className="w-auto bg-blue-nav2 px-4 text-light-gray z-50 shadow-md">
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
         <div>
-          <Link to="/" className="block">
+          <a href="/" className="block">
             <img
               src={'/assets/sarvil3602.png'}
               alt="Logo"
-              className="w-40 sm:w-48 md:w-64 lg:w-64" 
+              className="w-40 sm:w-48 md:w-60 lg:w-60"
             />
-          </Link>
+          </a>
         </div>
-        <ul className="hidden md:flex space-x-6">
+        <ul className="hidden md:flex space-x-8">
           {navItems.map((item) => (
-            <li key={item}>
-              <Link
-                to={`/${item.toLowerCase()}`}
-                className="hover:text-cyan-200 transition-colors text-lg font-medium"
+            <li key={item.id}>
+              <a
+                href={`#${item.id}`}
+                onClick={handleNavClick}
+                className="hover:text-cyan-200 transition-colors md:text-base font-medium"
               >
-                {item}
-              </Link>
+                {item.name}
+              </a>
             </li>
           ))}
         </ul>
@@ -46,18 +51,19 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Menú móvil (desplegable) */}
+      {/* Menú móvil */}
       {isMenuOpen && (
         <div className="md:hidden bg-blue-nav2 border-t border-cyan-900/30">
           <ul className="container mx-auto px-4 py-4 flex flex-col space-y-3">
             {navItems.map((item) => (
-              <li key={item}>
-                <Link
-                  to={`/${item.toLowerCase()}`}
-                  className="block py-2 text-base sm:text-lg hover:text-cyan-200 transition-colors font-medium"
+              <li key={item.id}>
+                <a
+                  href={`#${item.id}`}
+                  onClick={handleNavClick}
+                  className="block py-2 text-sm sm:text-base hover:text-cyan-200 transition-colors font-medium"
                 >
-                  {item}
-                </Link>
+                  {item.name}
+                </a>
               </li>
             ))}
           </ul>

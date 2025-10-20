@@ -19,7 +19,7 @@ const HeroImage = () => {
   }, [images.length]);
 
   return (
-    <div className="flex justify-center relative w-full aspect-[4/5] sm:aspect-[3/4] md:aspect-[4/3] max-w-lg mx-auto items-center">
+    <div className="flex justify-center relative w-full mt-4 aspect-auto sm:aspect-[3/4] md:aspect-[4/3] max-w-lg mx-auto items-center">
       <img
         src={images[currentIndex]}
         alt="Servicios de diseño y desarrollo"

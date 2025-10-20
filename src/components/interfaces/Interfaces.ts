@@ -39,17 +39,25 @@ export interface ICreateProject {
   title: string;
   description: string;
   category: string;
-  imageUrl?: string | null;
-  videoUrl?: string | null;
 }
 
 export interface IProject extends ICreateProject {
   id: string;
   isVisible: boolean;
-  createdAt: string;
-  updatedAt: string;
+  images?: IImage[];
+  videos?: IVideo[];
   createdBy: {
     id: string;
     name: string;
   }
+}
+export interface IImage {
+  id: string;
+  url: string;
+  isActive: boolean
+}
+export interface IVideo {
+  id: string;
+  url: string;
+  isActive: boolean
 }
