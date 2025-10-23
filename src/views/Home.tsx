@@ -6,7 +6,7 @@ import Footer from "../components/layout/Footer";
 
 const Home = () => {
   return (
-    <div className="overflow-x-hidden">
+    <div className="overflow-x-hidden pt-16">
       {/* <SiderSocial /> */}
       <Hero />
       <Planes />

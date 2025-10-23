@@ -46,7 +46,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative px-4 ml-[-18px] md:ml-0 overflow-hidden">
+    <section className="relative px-4 py-2 ml-[-18px] md:ml-0 overflow-hidden">
       <WaveBackground />
             
       <motion.div 
@@ -55,15 +55,15 @@ const Hero = () => {
         initial="hidden"
         animate="visible"
       >
-        <div className="flex justify-center md:justify-start lg:justify-start h-72 sm:h-80 md:h-[430px] lg:h-[450px] mb-0 sm:mt-6 sm:mb-4 md:mt-10 lg:mt-12">
+        <div className="flex justify-center md:justify-start lg:justify-start h-72 sm:h-80 md:h-[430px] lg:h-[450px] mb-0 mt-6 md:mt-16 lg:mt-24 sm:mb-4">
           <motion.div variants={imageVariants}>
             <HeroImage />
           </motion.div>
         </div>
 
-        <div className="lg:text-left space-y-2 mb-8 md:mb-8 lg:mb-8 sm:h-96 md:h-[430px] lg:h-[450px] flex flex-col justify-center items-center">
+        <div className="sm:text-left sm:mt-8 space-y-2 pr-4 mb-8 md:mb-8 lg:mb-8 sm:h-96 md:h-[430px] lg:h-[450px] flex flex-col justify-center items-center">
           <motion.div 
-            className="text-center mb-8 pl-4 pr-2 sm:mb-12 md:mb-4 lg:mb-8 sm:mt-16 md:mt-16 lg:mt-18 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-playfair text-almost-black"
+            className="text-center mb-8 pl-4 pr-2 sm:mb-12 md:mb-4 lg:mb-8 sm:mt-16 md:mt-16 lg:mt-18 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-playfair text-blue-950"
             variants={itemVariants}
           >
             <span className="leading-snug">

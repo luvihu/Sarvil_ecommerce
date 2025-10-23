@@ -62,19 +62,19 @@ const Planes = () => {
   };
   
   return (
-     <section id='servicios' className="py-16 px-8 bg-cyan-100/15">
+     <section id='servicios' className="py-10 sm:py-18 md:py-20 lg:py-24 px-8 bg-cyan-100/15">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-14"
+          className="text-center mb-10 md:mb-14"
         >
-          <h2 className="text-xl sm:text-2xl md:text-4xl font-bold text-almost-black mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold text-almost-black mb-4 font-playfair">
             Nuestros <span className="text-electric-blue">Planes</span>
           </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+          <p className="text-gray-600 max-w-2xl mx-auto sm:text-base md:text-lg lg:text-xl">
             Elige el paquete que mejor se adapte a tus necesidades y presupuesto.
           </p>
         </motion.div>
@@ -93,7 +93,7 @@ const Planes = () => {
               className={`border-l-4 ${planColors[index % planColors.length]} rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 bg-gray-50 p-6 flex flex-col h-full`}
             >
               <div className="mb-5">
-                <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-almost-black">
+                <h3 className="text-lg sm:text-xl md:text-xl lg:text-xl font-bold text-blue-950 font-roboto">
                   {plan.name}
                 </h3>
                 <p className="text-xs md:text-sm text-blue-nav mt-1">
@@ -105,7 +105,7 @@ const Planes = () => {
                 {plan.deliverables.map((item, i) => (
                   <li key={i} className="flex items-start">
                     <span className="text-electric-blue mr-2">•</span>
-                    <span className="text-gray-900 text-sm">{item}</span>
+                    <span className="text-gray-900 text-sm md:text-base">{item}</span>
                   </li>
                 ))}
               </ul>

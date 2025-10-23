@@ -96,12 +96,12 @@ const Portfolio = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-14"
+          className="text-center mb-10 md:mb-14"
         >
-          <h2 className="text-xl sm:text-2xl md:text-4xl font-bold text-almost-black mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold text-almost-black mb-4 font-playfair">
             Nuestro <span className="text-electric-blue">Trabajo</span>
           </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+          <p className="text-gray-600 max-w-2xl mx-auto sm:text-base md:text-lg lg:text-xl">
             Proyectos reales que demuestran nuestro enfoque en diseño, funcionalidad y resultados.
           </p>
         </motion.div>

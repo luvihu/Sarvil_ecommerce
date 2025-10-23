@@ -1,5 +1,3 @@
-// src/components/layout/Footer.tsx
-import { Link } from "react-router-dom";
 import {
   FaFacebook,
   FaInstagram,
@@ -39,19 +37,25 @@ const Footer = () => {
       color: 'text-[#0A66C2]'
     },
   ];
+  const footerItems = [
+    { name: 'Nosotros', id: 'nosotros' },
+    { name: 'Servicios', id: 'servicios' },
+    { name: 'Portafolio', id: 'portafolio' }
+    
+  ];
 
   return (
     <footer id='contacto' className="bg-blue-nav2 text-light-gray py-10 md:py-12 px-5">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-4">
            <div className="lg:col-span-1">
-            <Link to="/" className="block mb-4">
+            <a href="/" className="block mb-4">
               <img
                 src="/assets/sarvil3602.png"
                 alt="Sarvil 360°"
                 className="w-32 sm:w-40 md:w-48"
               />
-            </Link>
+            </a>
             <p className="text-sm text-gray-300 leading-relaxed">
               Diseño web y soluciones digitales con enfoque en resultados reales para tu negocio.
             </p>
@@ -60,14 +64,14 @@ const Footer = () => {
           <div className="md:ml-5 lg:ml-10">
             <h3 className=" md:text-lg font-semibold text-white mb-4">Navegación</h3>
             <ul className="space-y-2">
-              {['Nosotros', 'Servicios', 'Portafolio', 'Contacto'].map((item) => (
-                <li key={item}>
-                  <Link
-                    to={`/${item.toLowerCase()}`}
+              {footerItems.map((item) => (
+                <li key={item.id}>
+                  <a
+                    href={`#${item.id}`}
                     className="block text-sm hover:text-cyan-cyan transition-colors"
                   >
-                    {item}
-                  </Link>
+                    {item.name}
+                  </a>
                 </li>
               ))}
             </ul>
