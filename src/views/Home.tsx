@@ -3,6 +3,7 @@ import Hero from "../components/sections/Hero";
 import Planes from "../components/sections/Planes";
 import Portfolio from "../components/sections/Portfolio";
 import Footer from "../components/layout/Footer";
+import QaServices from "../components/sections/QaServices";
 
 const Home = () => {
   return (
@@ -10,6 +11,7 @@ const Home = () => {
       {/* <SiderSocial /> */}
       <Hero />
       <Planes />
+      <QaServices />
       <Portfolio />
       <Footer />
     </div>
@@ -17,4 +19,3 @@ const Home = () => {
 };
 export default Home;
 
-//<div className="pt-[89.36px] md:pt-[115px]">

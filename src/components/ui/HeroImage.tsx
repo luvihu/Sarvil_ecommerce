@@ -23,7 +23,7 @@ const HeroImage = () => {
       <img
         src={images[currentIndex]}
         alt="Servicios de diseño y desarrollo"
-        className="h-60 w-60 sm:h-72 sm:w-64 md:h-80 md:w-72 lg:h-80 lg:w-96 ml-4 object-contain transition-opacity duration-700 ease-in-out"
+        className="h-60 w-60 sm:h-72 sm:w-72 md:h-80 md:w-80 lg:h-80 lg:w-[430px] ml-4 object-contain transition-opacity duration-700 ease-in-out"
         loading="lazy"
       />
     </div>

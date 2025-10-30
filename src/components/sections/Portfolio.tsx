@@ -1,81 +1,108 @@
-// src/components/sections/Portfolio.tsx
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, type Variants } from 'framer-motion';
 import { allProjects } from '../../redux/actions/projects/allProjects';
 import { type AppDispatch, type RootState } from '../../redux/store';
 import { type IProject } from '../interfaces/Interfaces';
+import dataPortafolio from '../fondos/DataPortafolio';
+import { BiRightArrow } from "react-icons/bi";
+import { FaCreditCard } from "react-icons/fa";
 
 const Portfolio = () => {
   const dispatch = useDispatch<AppDispatch>();
   const projects = useSelector((state: RootState) => state.project?.projects) as IProject[] | undefined;
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+  const [currentImageIndexes, setCurrentImageIndexes] = useState<{ [key: string]: number }>({});
 
   useEffect(() => {
     dispatch(allProjects());
   }, [dispatch]);
 
-  // Agrupar por categoría
-  const groupedProjects = projects?.reduce((acc, project) => {
-    if (!acc[project.category]) acc[project.category] = [];
-    acc[project.category].push(project);
-    return acc;
-  }, {} as Record<string, IProject[]>);
+  // Efecto para el carrusel automático de imágenes
+  useEffect(() => {
+    if (!projects) return;
 
-  const container = {
-    hidden: { opacity: 0 },
+    const timers: number[] = [];
+
+    projects.forEach((project) => {
+      if (project.images && project.images.length > 1) {
+        const timer = window.setInterval(() => {
+          setCurrentImageIndexes(prev => ({
+            ...prev,
+            [project.id]: prev[project.id] === project.images!.length - 1 
+              ? 0 
+              : (prev[project.id] || 0) + 1
+          }));
+        }, 3000); // Cambia cada 3 segundos
+
+        timers.push(timer);
+      }
+    });
+
+    // Cleanup: limpiar todos los timers
+    return () => {
+      timers.forEach(timer => window.clearInterval(timer));
+    };
+  }, [projects]);
+
+  const handleClick = (index: number) => {
+    setExpandedIndex((prevIndex) => (prevIndex === index ? null : index));
+  };
+
+  const cardVariants: Variants = {
+    expanded: {
+      width: "600px",
+      opacity: 1
+    },
+    collapsed: {
+      width: "520px",
+      opacity: 0.7,
+      marginRight: "20px",
+      marginBottom: "20px"
+    }
+  };
+
+  // Definir fadeIn con tipo Variants
+  const fadeIn = (direction: 'left' | 'right' | 'up' | 'down', delay: number): Variants => ({
+    hidden: {
+      x: direction === 'left' ? -100 : direction === 'right' ? 100 : 0,
+      y: direction === 'up' ? 100 : direction === 'down' ? -100 : 0,
+      opacity: 0,
+    },
     show: {
+      x: 0,
+      y: 0,
       opacity: 1,
       transition: {
-        staggerChildren: 0.15,
+        type: 'spring',
+        duration: 1.2,
+        delay,
       },
     },
+  });
+
+  // Función para encontrar los skills por título del proyecto
+  const getSkillsByTitle = (title: string) => {
+    const projectData = dataPortafolio.find(item => item.title === title);
+    return projectData?.skills || [];
   };
 
-  const item = {
-    hidden: { y: 30, opacity: 0 },
-    show: { y: 0, opacity: 1, transition: { duration: 0.5 } },
-  };
-
-  // Colores por categoría
-  const getCategoryColor = (category: string) => {
-    const lower = category.toLowerCase();
-    if (lower.includes('landing') || lower.includes('web')) return 'bg-electric-blue/10 text-electric-blue';
-    if (lower.includes('tienda') || lower.includes('ecommerce') || lower.includes('catálogo')) return 'bg-cyan-cyan/10 text-cyan-cyan';
-    if (lower.includes('automatización') || lower.includes('chatbot')) return 'bg-blue-ul/10 text-blue-ul';
-    return 'bg-gray-100 text-gray-700';
-  };
-
-  const renderMedia = (project: IProject) => {
-    
-    const activeImage = project.images?.find(img => img.isActive);
-    if (activeImage?.url) {
-      return (
-        <img
-          src={activeImage.url.trim()}
-          alt={project.title}
-          className="w-full h-full object-cover"
-          onError={(e) => (e.currentTarget.src = '/assets/placeholder.jpg')}
-        />
-      );
+  // Función para obtener la imagen actual de un proyecto
+  const getCurrentImage = (project: IProject) => {
+    if (!project.images || project.images.length === 0) {
+      return null;
     }
     
-    const activeVideo = project.videos?.find(v => v.isActive);
-    if (activeVideo?.url) {
-      return (
-        <div className="w-full h-full flex items-center justify-center bg-black/5">
-          <div className="text-center">
-            <span className="block text-2xl mb-1">🎥</span>
-            <span className="text-electric-blue font-medium text-sm">Video del proyecto</span>
-          </div>
-        </div>
-      );
-    }
+    const currentIndex = currentImageIndexes[project.id] || 0;
+    return project.images[currentIndex];
+  };
 
-    return (
-      <div className="w-full h-full flex items-center justify-center bg-gray-100">
-        <span className="text-gray-400 text-sm">Sin medios</span>
-      </div>
-    );
+  // Función para cambiar manualmente la imagen
+  const goToImage = (projectId: string, index: number) => {
+    setCurrentImageIndexes(prev => ({
+      ...prev,
+      [projectId]: index
+    }));
   };
 
   if (!projects) {
@@ -89,16 +116,16 @@ const Portfolio = () => {
   }
 
   return (
-    <section id='portafolio' className="py-8 px-8 bg-amber-50/10">
-      <div className="max-w-7xl mx-auto">
+    <section id='portafolio' className="min-h-screen py-4 md:py-8 bg-amber-50/10">
+      <div className="max-w-9xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          variants={fadeIn('left', 0.5)}
+          initial="hidden"
+          animate="show"
+          exit="hidden"
           className="text-center mb-10 md:mb-14"
         >
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold text-almost-black mb-4 font-playfair">
+          <h2 className="mt-8 text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold text-almost-black mb-4 font-playfair">
             Nuestro <span className="text-electric-blue">Trabajo</span>
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto sm:text-base md:text-lg lg:text-xl">
@@ -106,45 +133,116 @@ const Portfolio = () => {
           </p>
         </motion.div>
 
-        <AnimatePresence>
-          {groupedProjects &&
-            Object.entries(groupedProjects).map(([category, projects]) => (
-              <div key={category} className="mb-12">
-                <h3 className="text-xl font-bold text-almost-black mb-6 flex items-center">
-                  <span className={`px-3 py-1 rounded-full text-sm font-medium ${getCategoryColor(category)}`}>
-                    {category}
-                  </span>
-                </h3>
+        <motion.div
+          className="flex justify-center items-center pl-3 h-full gap-1 sm:gap-10 md:gap-10 flex-row flex-wrap pb-14 pt-4 bg-cyan-100/15"
+          variants={fadeIn('up', 0.5)}
+          initial="hidden"
+          animate="show"
+          exit="hidden"
+        >
+          <AnimatePresence>
+            {projects.map((project, index) => {
+              const skills = getSkillsByTitle(project.title);
+              const currentImage = getCurrentImage(project);
+              const currentIndex = currentImageIndexes[project.id] || 0;
 
-                <motion.div
-                  variants={container}
-                  initial="hidden"
-                  whileInView="show"
-                  viewport={{ once: true }}
-                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+              return (
+                <motion.div 
+                  key={project.id}
+                  className={`card cursor-pointer h-[412px] bg-contain bg-no-repeat bg-center rounded-[20px] relative  ${
+                    index === expandedIndex && 'expanded'
+                  }`}
+                  initial={{ opacity: 1 }}
+                  variants={cardVariants}
+                  animate={index === expandedIndex ? 'expanded' : 'collapsed'}
+                  exit={{ opacity: 1 }}
+                  transition={{ duration: 0.5 }}
+                  onClick={() => handleClick(index)}
+                  style={{
+                    backgroundImage: currentImage?.url 
+                      ? `url(${currentImage.url})`
+                      : project.images && project.images.length > 0
+                      ? `url(${project.images[0].url})`
+                      : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+                  }}
                 >
-                  {projects.map((project) => (
-                    <motion.div
-                      key={project.id}
-                      variants={item}
-                      className="bg-gray-50 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300"
-                    >
-                      {/* Media: video o imagen */}
-                      <div className="h-48">
-                        {renderMedia(project)}
-                      </div>
+                  {/* Indicadores de imágenes (solo si hay más de 1 imagen) */}
+                  {project.images && project.images.length > 1 && (
+                    <div className="absolute top-4 right-4 flex gap-2">
+                      {project.images.map((_, imgIndex) => (
+                        <button
+                          key={imgIndex}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            goToImage(project.id, imgIndex);
+                          }}
+                          className={`w-1 h-1 rounded-full transition-all ${
+                            currentIndex === imgIndex 
+                              ? 'bg-cyan-100 scale-110' 
+                              : 'bg-white/50 hover:bg-white/70'
+                          }`}
+                        />
+                      ))}
+                    </div>
+                  )}
 
-                      {/* Contenido */}
-                      <div className="p-5">
-                        <h4 className="font-bold text-lg text-almost-black mb-2">{project.title}</h4>
-                        <p className="text-gray-700 text-sm">{project.description}</p>
-                      </div>
-                    </motion.div>
-                  ))}
+                  <div className="flex flex-col justify-end h-full">
+                    <div className="card-footer rounded-b-[20px] bg-gray-800 bg-opacity-75 min-h-[100px] flex flex-col items-center justify-center p-3">
+                      <h2 className="flex items-center md:text-xl font-semibold text-center text-white">
+                        {project.title} 
+                        <BiRightArrow className="ml-2" />
+                      </h2>
+                      {index === expandedIndex && (
+                        <>
+                          <p className="text-white text-sm text-center mt-1 line-clamp-3">
+                            {project.description}
+                          </p>
+                          <div className="flex gap-4 mt-4 flex-wrap justify-center">
+                            {skills.map((skill, skillIndex) => (
+                              <div key={skillIndex} className="text-white hover:text-electric-blue transition-colors">
+                                {skill.icon}
+                              </div>
+                            ))}
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                  
+                  {/* Links de demo y github */}
+                  <div className="flex gap-5 mt-6 ml-4">
+                    {project.videos && project.videos.length > 0 ? (
+                      <a 
+                        href={project.videos[0]?.url} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="flex items-center text-secondary hover:text-electric-blue transition-colors"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <FaCreditCard size="20" className="mr-1"/>
+                        <span>Demo</span>
+                      </a>
+                    ) : (
+                      <span className="flex items-center text-gray-700 cursor-not-allowed">
+                        <FaCreditCard size="20" className="mr-1"/>
+                        <span>Demo</span>
+                      </span>
+                    )}
+                    
+                    {/* Placeholder para GitHub */}
+                    {/* <span 
+                      className="flex items-center justify-center text-secondary hover:text-electric-blue transition-colors cursor-pointer"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <SiGithub size="20" className="mr-1" />
+                      <span>GitHub</span>
+                    </span> */}
+                  </div>
                 </motion.div>
-              </div>
-            ))}
-        </AnimatePresence>
+              );
+            })}
+          </AnimatePresence>
+        </motion.div>
       </div>
     </section>
   );
