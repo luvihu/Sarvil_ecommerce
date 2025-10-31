@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  line-height: 1;
+  
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  /* line-height: 1; */
+  margin: 1px;
+  
+}
+body {
+  /* line-height: 1; */
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-weight: inherit;
+  font-style: inherit;
+  font-size: 100%;
+  font-family: inherit;
+  vertical-align: baseline;
+  /* background-color: #f0f8ff; */
+}
+
+html {
+   scroll-behavior: smooth;
+}
+body {
+  height: 100vh;
+  width: 100vw;
+  /* overflow-x: hidden; */
+  /* overflow-y: hidden; */
+  overflow: auto;
+}
+
+a {
+  text-decoration: none;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  line-height: 1.5;
+
+}
+
+/* Scrollbar personalizado - Sin dependencias externas */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f8;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #010611 20%, #06B6D4 100%);
+  border-radius: 10px;
+  border: 1px solid #dae9f8;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #0d1b47 0%, #0891b2 100%);
+}
+
+/* Para Firefox
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #2563EB #f1f5f9;
+} */
+
+/* Para Safari mobile */
+@supports (-webkit-touch-callout: none) {
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+}
+
+
