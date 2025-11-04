@@ -50,7 +50,7 @@ const Hero = () => {
       <WaveBackground />
             
       <motion.div 
-        className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-0 sm:gap-2 md:gap-0 lg:gap-0 items-center h-full"
+        className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-0 sm:gap-2 md:gap-0 lg:gap-4 items-center h-full"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
