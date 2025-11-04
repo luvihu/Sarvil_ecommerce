@@ -63,7 +63,7 @@ const Hero = () => {
 
         <div className=" sm:text-left sm:mt-8 space-y-2 pr-4 mb-8 md:mb-8 lg:mb-8 sm:h-96 md:h-[430px] lg:h-[450px] flex flex-col justify-center items-center">
           <motion.div 
-            className="text-center sm:text-left mb-4 pl-6 sm:pl-4 pr-2 sm:mb-6 md:mb-4 lg:mb-8 sm:mt-16 md:mt-16 lg:mt-18 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-playfair text-blue-950"
+            className="text-center sm:text-left mb-4 pl-6 sm:pl-4 lg:pl-8 pr-2 sm:mb-6 md:mb-4 lg:mb-8 sm:mt-16 md:mt-16 lg:mt-18 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-playfair text-blue-950"
             variants={itemVariants}
           >
             <span className="leading-snug">
@@ -80,7 +80,7 @@ const Hero = () => {
           </motion.div>
           
           <motion.p 
-            className="text-base md:text-xl lg:text-xl text-gray-700 max-w-xl mx-auto lg:mx-0 pl-9 sm:pl-6 pr-3 pb-3 md:p-0 lg:p-0 text-justify"
+            className="text-base md:text-xl lg:text-xl text-gray-700 max-w-xl mx-auto lg:mx-0 pl-9 sm:pl-6 lg:pl-7 pr-3 pb-3 md:p-0 lg:p-0 text-justify"
             variants={itemVariants}
           >
             Transformo ideas en experiencias digitales que conectan y venden.

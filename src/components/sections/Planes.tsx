@@ -73,7 +73,7 @@ const Planes = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-12 md:mb-16"
         >
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold text-almost-black mb-6 sm:mb-8 font-playfair">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold text-almost-black mb-6 sm:mb-8 lg:mb-10 font-playfair">
             Nuestros <span className="text-electric-blue">Planes</span>
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto sm:text-base md:text-lg lg:text-xl">
@@ -119,7 +119,7 @@ const Planes = () => {
                 </div>
 
                 <div className="mb-5 flex-grow">
-                  <h3 className="text-lg sm:text-xl md:text-xl lg:text-xl font-bold text-blue-950 font-roboto group-hover:text-electric-blue transition-colors">
+                  <h3 className="text-lg sm:text-xl md:text-xl lg:text-xl lg:mb-4 font-bold text-blue-950 font-roboto group-hover:text-electric-blue transition-colors">
                     {plan.name}
                   </h3>
                   <p className="text-xs md:text-sm text-blue-nav mt-2 leading-relaxed">
