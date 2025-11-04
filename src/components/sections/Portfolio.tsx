@@ -56,7 +56,7 @@ const Portfolio = () => {
     },
     collapsed: {
       width: "520px",
-      opacity: 0.7,
+      opacity: 0.8,
       marginRight: "20px",
       marginBottom: "20px"
     }
@@ -116,25 +116,25 @@ const Portfolio = () => {
   }
 
   return (
-    <section id='portafolio' className="min-h-screen py-4 md:py-8 bg-amber-50/10">
+    <section id='portafolio' className="min-h-screen py-10 sm:py-18 md:py-20 lg:py-26 bg-amber-50/10">
       <div className="max-w-9xl mx-auto">
         <motion.div
           variants={fadeIn('left', 0.5)}
           initial="hidden"
           animate="show"
           exit="hidden"
-          className="text-center mb-10 md:mb-14"
+          className="text-center mb-4 sm:mb-10 md:mb-14"
         >
           <h2 className="mt-8 text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold text-almost-black mb-4 font-playfair">
             Nuestro <span className="text-electric-blue">Trabajo</span>
           </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto sm:text-base md:text-lg lg:text-xl">
+          <p className="text-gray-600 max-w-2xl mx-auto px-6 sm:px-0 sm:text-base md:text-lg lg:text-xl">
             Proyectos reales que demuestran nuestro enfoque en diseño, funcionalidad y resultados.
           </p>
         </motion.div>
 
         <motion.div
-          className="flex justify-center items-center pl-3 h-full gap-1 sm:gap-10 md:gap-10 flex-row flex-wrap pb-14 pt-4 bg-cyan-100/15"
+          className="flex justify-center items-center pl-3 h-full gap-1 sm:gap-10 md:gap-10 flex-row flex-wrap sm:pb-14 bg-cyan-100/15"
           variants={fadeIn('up', 0.5)}
           initial="hidden"
           animate="show"
@@ -168,7 +168,7 @@ const Portfolio = () => {
                 >
                   {/* Indicadores de imágenes (solo si hay más de 1 imagen) */}
                   {project.images && project.images.length > 1 && (
-                    <div className="absolute top-4 right-4 flex gap-2">
+                    <div className="absolute top-4 right-3 flex gap-2">
                       {project.images.map((_, imgIndex) => (
                         <button
                           key={imgIndex}
@@ -188,16 +188,16 @@ const Portfolio = () => {
 
                   <div className="flex flex-col justify-end h-full">
                     <div className="card-footer rounded-b-[20px] bg-gray-800 bg-opacity-75 min-h-[100px] flex flex-col items-center justify-center p-3">
-                      <h2 className="flex items-center md:text-xl font-semibold text-center text-white">
+                      <h2 className="flex items-center md:text-lg font-bold text-center text-white">
                         {project.title} 
                         <BiRightArrow className="ml-2" />
                       </h2>
                       {index === expandedIndex && (
                         <>
-                          <p className="text-white text-sm text-center mt-1 line-clamp-3">
+                          <p className="text-white text-sm mt-1 text-justify">
                             {project.description}
                           </p>
-                          <div className="flex gap-4 mt-4 flex-wrap justify-center">
+                          <div className="flex gap-5 sm:gap-4 mt-4 flex-wrap justify-center">
                             {skills.map((skill, skillIndex) => (
                               <div key={skillIndex} className="text-white hover:text-electric-blue transition-colors">
                                 {skill.icon}
@@ -224,8 +224,8 @@ const Portfolio = () => {
                       </a>
                     ) : (
                       <span className="flex items-center text-gray-700 cursor-not-allowed">
-                        <FaCreditCard size="20" className="mr-1"/>
-                        <span>Demo</span>
+                        {/* <FaCreditCard size="20" className="mr-1"/>
+                        <span>Demo</span> */}
                       </span>
                     )}
                     

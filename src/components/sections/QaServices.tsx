@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
-import { FaPhoneAlt } from "react-icons/fa";
+import { FaPhoneAlt, FaCheckCircle } from "react-icons/fa";
 
 const qaServices = [
   {
@@ -10,7 +10,7 @@ const qaServices = [
     image: "/assets/funtion.jpeg",
     icon: "🧪",
     features: ["Testing de UI", "APIs REST", "Flujos completos"],
-    color: "from-electric-blue/70 to-cyan-300"
+    color: "from-blue-nav2/70 to-cyan-300/40"
   },
   {
     title: "Pruebas de Rendimiento",
@@ -19,7 +19,7 @@ const qaServices = [
     image: "/assets/estres.jpeg",
     icon: "⚡",
     features: ["Pruebas de carga", "Análisis de estrés", "Optimización"],
-    color: "from-electric-blue/70 to-cyan-300"
+    color: "from-blue-nav2/70 to-cyan-300/40"
   },
   {
     title: "Automatización",
@@ -28,7 +28,7 @@ const qaServices = [
     image: "/assets/auto.jpeg",
     icon: "🤖",
     features: ["Scripts automatizados", "Multi-plataforma", "CI/CD Integration"],
-    color: "from-electric-blue/70 to-cyan-300"
+    color: "from-blue-nav2/70 to-cyan-300/40"
   },
 ];
 
@@ -55,20 +55,13 @@ const QaServicesSection: React.FC = () => {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-16 flex justify-center items-center"
         >
-          <motion.div
-            initial={{ scale: 0 }}
-            whileInView={{ scale: 1 }}
-            transition={{ delay: 0.2, type: "spring" }}
-            className="w-16 h-16 bg-gradient-to-r from-cyan-200 to-electric-blue/30 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg"
-          >
-            <span className="text-3xl">🔍</span>
-          </motion.div>
-          
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold text-almost-black mb-4 font-playfair">
+                  
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold text-almost-black md:mb-4 font-playfair">
             Servicios de <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-electric-blue">QA</span>
           </h2>
+          <FaCheckCircle className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 lg:h-9 lg:w-9 ml-3 md:ml-5 bg-gradient-to-r from-cyan-200 to-electric-blue rounded-full shadow-lg"/>
           
         </motion.div>
 
@@ -83,7 +76,7 @@ const QaServicesSection: React.FC = () => {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-16 mt-12 max-w-5xl mx-auto pl-6 pb-6"
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-10 lg:gap-16 mt-12 max-w-5xl mx-auto pl-6 pb-6"
         >
           {qaServices.map((service, index) => (
             <motion.button
@@ -91,16 +84,16 @@ const QaServicesSection: React.FC = () => {
               whileHover={{ scale: 1.05, y: -5 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setActiveIndex(index)}
-              className={`p-4 rounded-2xl text-left transition-all duration-300 ${
+              className={`p-2 sm:p-4 rounded-2xl text-left transition-all duration-300 ${
                 index === activeIndex
                   ? 'bg-gradient-to-r from-cyan-50 to-blue-50 border-2 border-cyan-300 shadow-lg'
                   : 'bg-white border border-gray-200 hover:border-cyan-200'
               }`}
             >
               <div className="flex items-center gap-3">
-                <span className="text-2xl">{service.icon}</span>
+                <span className="md:text-2xl">{service.icon}</span>
                 <div>
-                  <h4 className="font-semibold text-gray-800">{service.title}</h4>
+                  <h4 className="text-sm font-semibold text-gray-800">{service.title}</h4>
                   <p className="text-sm text-gray-600">{service.subtitle}</p>
                 </div>
               </div>
@@ -108,7 +101,7 @@ const QaServicesSection: React.FC = () => {
           ))}
         </motion.div>
           {/* Contenedor del Carrusel */}
-          <div className="relative h-[600px] overflow-hidden rounded-3xl">
+          <div className="relative h-[430px] sm:h-[480px] md:h-[580px] overflow-hidden rounded-3xl">
             {qaServices.map((service, index) => (
               <motion.div
                 key={service.title}
@@ -126,11 +119,11 @@ const QaServicesSection: React.FC = () => {
                 {/* Tarjeta Principal */}
                 <div className="bg-light-gray/30 rounded-3xl shadow-2xl h-full overflow-hidden border border-gray-100">
                   {/* Header con Gradiente */}
-                  <div className={`bg-gradient-to-r ${service.color} p-8 text-white relative overflow-hidden`}>
-                    <div className="absolute top-4 right-4 text-4xl opacity-20">
+                  <div className={`bg-gradient-to-r ${service.color} p-4 sm:p-8 text-white relative overflow-hidden`}>
+                    <div className="absolute top-4 right-4 text-2xl md:text-4xl opacity-20">
                       {service.icon}
                     </div>
-                    <div className="relative z-10 pl-2">
+                    <div className="relative z-10 pl-2 ">
                       <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -138,16 +131,16 @@ const QaServicesSection: React.FC = () => {
                         className="flex items-center gap-3 mb-2"
                       >
                         <span className="text-2xl">{service.icon}</span>
-                        <h3 className="text-xl md:text-2xl font-bold font-playfair">
+                        <h3 className="text-lg sm:text-xl md:text-2xl p-2 font-bold font-playfair shadow-cyan-50 shadow-inner">
                           {service.title}
                         </h3>
-                        <span className="text-lg opacity-90 font-light">{service.subtitle}</span>
+                        <span className="text-base sm:text-lg opacity-90 font-light">{service.subtitle}</span>
                       </motion.div>
                       <motion.p
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.3 }}
-                        className="text-gray-700 text-lg leading-relaxed text-center"
+                        className="text-amber-950 text-sm md:text-base leading-relaxed text-justify"
                       >
                         {service.description}
                       </motion.p>
@@ -155,12 +148,12 @@ const QaServicesSection: React.FC = () => {
                   </div>
 
                   {/* Imagen Centrada */}
-                  <div className="relative h-[420px] mx-6">
+                  <div className="relative mx-4 h-[230px] sm:h-[280px] md:h-[380px]">
                     <motion.div
                       initial={{ scale: 0.8, opacity: 0 }}
                       animate={{ scale: 1, opacity: 1 }}
                       transition={{ delay: 0.4, type: "spring" }}
-                      className="w-full h-full rounded-2xl overflow-hidden shadow-xl border-4 border-white"
+                      className="w-full h-full mt-2 rounded-2xl overflow-hidden shadow-xl border-2 border-white"
                     >
                       <img
                         src={service.image}
@@ -182,24 +175,24 @@ const QaServicesSection: React.FC = () => {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
-          className="text-center mt-14"
+          className="text-center mt-6 md:mt-10 lg:mt-14"
         >
-          <div className="bg-gradient-to-r from-cyan-50 to-blue-50 rounded-3xl p-5 shadow-lg border border-cyan-100 max-w-2xl mx-auto">
-            <h3 className="text-xl font-bold text-gray-800 mb-4">
+          <div className="bg-gradient-to-r from-cyan-50 to-blue-50 rounded-3xl p-3 sm:p-5 shadow-lg border border-cyan-100 max-w-2xl mx-auto">
+            <h3 className="text-sm sm:text-base md:text-lg font-bold text-gray-800 mb-2 sm:mb-4">
               ¿Necesitas una solución personalizada?
             </h3>
-            <p className="text-gray-600 mb-6">
+            <p className="text-gray-600 mb-3 sm:mb-6 text-sm md:text-base">
               Contáctanos para diseñar una estrategia de QA adaptada específicamente a tu proyecto.
             </p>
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-gradient-to-r from-cyan-500 to-electric-blue text-white cursor-auto font-bold px-8 py-4 rounded-xl hover:shadow-xl transition-all duration-300"
+              className="bg-gradient-to-r from-cyan-500 to-electric-blue text-white cursor-auto font-bold px-4 py-2 sm:px-7 sm:py-3 text-sm md:text-base rounded-xl hover:shadow-xl transition-all duration-300"
             >
               Consultoría Gratuita
-              <div className='flex pt-1'>
+              <div className='flex sm:pt-1 items-center justify-center'>
                 <FaPhoneAlt className=" mr-3" />
-                  <span>(+51) 998 826 388</span>
+                  <span> 998 826 388</span>
               </div>
             </motion.button>
           </div>
