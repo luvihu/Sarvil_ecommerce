@@ -134,7 +134,7 @@ const Portfolio = () => {
         </motion.div>
 
         <motion.div
-          className="flex justify-center items-center pl-3 h-full gap-1 sm:gap-10 md:gap-10 flex-row flex-wrap sm:pb-14 bg-cyan-100/15"
+          className="flex justify-center items-center pl-3 h-full gap-1 sm:gap-10 md:gap-10 lg:gap-8 flex-row flex-wrap sm:pb-14 bg-cyan-100/15"
           variants={fadeIn('up', 0.5)}
           initial="hidden"
           animate="show"
