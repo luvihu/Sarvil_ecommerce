@@ -31,7 +31,7 @@ const Footer = () => {
       color: 'text-[#1DA1F2]'
     },
     {
-      href: 'https://linkedin.com',
+      href: 'https://www.linkedin.com/in/lucyvillogas/',
       label: 'LinkedIn',
       icon: <FaLinkedin size={18} />,
       color: 'text-[#0A66C2]'
