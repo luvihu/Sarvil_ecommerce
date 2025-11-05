@@ -25,7 +25,7 @@ const Footer = () => {
       color: 'text-[#E1306C]'
     },
     {
-      href: 'https://twitter.com',
+      href: '/',
       label: 'Twitter',
       icon: <FaTwitter size={18} />,
       color: 'text-[#1DA1F2]'
