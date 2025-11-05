@@ -13,13 +13,13 @@ const Footer = () => {
 
   const socials = [
     {
-      href: 'https://facebook.com',
+      href: 'https://www.facebook.com/profile.php?id=61576887365515',
       label: 'Facebook',
       icon: <FaFacebook size={18} />,
       color: 'text-[#1877F2]'
     },
     {
-      href: 'https://instagram.com',
+      href: 'https://www.instagram.com/sv360_solutions/',
       label: 'Instagram',
       icon: <FaInstagram size={18} />,
       color: 'text-[#E1306C]'
