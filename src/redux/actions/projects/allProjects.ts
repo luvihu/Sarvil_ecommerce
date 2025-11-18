@@ -8,7 +8,6 @@ export const allProjects = () => {
   return async (dispatch: Dispatch) => {
     try {
         const response = await axios.get(`${API_URL_BASE}/project`);
-        console.log(response.data.data);
         dispatch({
         type: ALL_PROJECTS,
         payload: response.data.data,

@@ -77,7 +77,7 @@ const Planes = () => {
             Nuestros <span className="text-electric-blue">Planes</span>
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto sm:text-base md:text-lg lg:text-xl">
-            Elige el paquete que mejor se adapte a tus necesidades o contáctanos para un plan personalizado.
+            Elige el paquete que mejor se adapte a tus necesidades o contáctanos para un plan personalizado. <br /><span className="text-[#2563EB]">Consulta gratuita de 30 min. Presupuesto sin compromiso.</span>
           </p>
         </motion.div>
 
