@@ -83,19 +83,21 @@ const Hero = () => {
             className="text-base md:text-xl lg:text-xl text-gray-700 max-w-xl mx-auto lg:mx-0 pl-9 sm:pl-6 lg:pl-7 pr-3 pb-3 md:p-0 lg:p-0 text-justify"
             variants={itemVariants}
           >
-            Transformo ideas en experiencias digitales que conectan y venden.
+            {/* Transformo ideas en experiencias digitales que conectan y venden. */}
+            Transformamos tu idea de negocio en una máquina de ventas digital. 
           </motion.p>
           
            <motion.div 
-            className="flex justify-center pt-2 sm:pt-6"
+            className="flex flex-col justify-center items-center pt-2 sm:pt-6"
             variants={itemVariants}
           >
+            <span className="text-[#0437a5] text-xs md:text-sm lg:text-base mb-1">Cotiza tu Web Ahora ↓</span>
              <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="bg-gradient-to-r from-cyan-500 to-electric-blue text-white cursor-auto font-bold px-4 py-2 sm:px-7 sm:text-base md:text-lg rounded-xl hover:shadow-xl transition-all duration-300"
             >
-               <div className='flex items-center justify-center'>
+              <div className='flex items-center justify-center'>
                 <FaPhoneAlt className=" mr-3" />
                   <span> 998 826 388</span>
               </div>
